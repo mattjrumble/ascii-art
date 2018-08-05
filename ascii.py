@@ -1,8 +1,8 @@
 import os
 import shutil
 import numpy as np
+from math import floor
 from PIL import Image
-
 
 def grayscale(img):
     # Convert img to grayscale.
@@ -16,17 +16,17 @@ def average_val(pixels, y, x, y_step, x_step):
     if x_step == 0:
         raise Exception('x_step must be non-zero')
 
-    start_y = int(round(y))
-    end_y = int(round(y+y_step))
-    start_x = int(round(x))
-    end_x= int(round(x+x_step))
+    start_y = int(floor(y))
+    end_y = int(floor(y+y_step))
+    start_x = int(floor(x))
+    end_x= int(floor(x+x_step))
 
     total = 0
     count = 0
 
-    for y in range(start_y, end_y+1):
-        for x in range(start_x, end_x+1):
-            total += pixels[y, x]
+    for py in range(start_y, end_y+1):
+        for px in range(start_x, end_x+1):
+            total += pixels[py, px]
             count += 1
 
     return total / count
@@ -35,12 +35,16 @@ def calculate_step_sizes(height, width):
     # Calculate how big a region of the image each ASCII char should represent,
     # so that we remain inside the max output dimensions.
 
+    TERMINAL_DIMENSIONS = [150, 40, 10, 22]
+    GITHUB_DIMENSIONS = [150, 25, 10, 29]
+    DIMENSIONS_LIST = GITHUB_DIMENSIONS
+
     # Max number of output characters to display
-    MAX_OUTPUT_WIDTH = 150
-    MAX_OUTPUT_HEIGHT = 40
+    MAX_OUTPUT_WIDTH = DIMENSIONS_LIST[0]
+    MAX_OUTPUT_HEIGHT = DIMENSIONS_LIST[1]
     # The dimensions of an ASCII char displayed in my terminal
-    ASCII_CHAR_WIDTH = 10
-    ASCII_CHAR_HEIGHT = 22
+    ASCII_CHAR_WIDTH = DIMENSIONS_LIST[2]
+    ASCII_CHAR_HEIGHT = DIMENSIONS_LIST[3]
 
     # See if we can fit to max output width
     x_step = width / MAX_OUTPUT_WIDTH
@@ -52,11 +56,27 @@ def calculate_step_sizes(height, width):
 
     return y_step, x_step
 
+def get_full_path(file_dir, file_prefix):
+    # Return the full path of the first file found in the given
+    # with a name that starts with the given prefix.
+    supported_formats = ['.jpg', '.jpeg', '.png']
+    
+    unsupported_files_found = False
+
+    for f in os.listdir(file_dir):
+        if f.startswith(file_prefix):
+            if os.path.splitext(f)[1] in supported_formats:
+                return os.path.join(file_dir, f)
+            else:
+                unsupported_files_found = True
+    
+    if unsupported_files_found:
+        raise Exception("No supported file found with prefix '{}' in '{}'".format(file_prefix, file_dir))
+    else:
+        raise Exception("No file found with prefix '{}' in '{}'".format(file_prefix, file_dir))
 
 # File locations
-sample_dir = 'samples'
-sample_file = 'girl.png'
-sample_path = os.path.join(sample_dir, sample_file)
+sample_path = get_full_path('samples', 'girl')
 output_path = 'result.txt'
 
 # Load grayscale image
@@ -71,10 +91,10 @@ output = ''
 for y in np.arange(0, height-y_step, y_step):
     for x in np.arange(0, width-x_step, x_step):
         val = average_val(pixels, y, x, y_step, x_step)
-        if val >= 128:
+        if val < 128:
             output += '#'
         else:
-            output += '_'
+            output += '.'
     output += '\n'
 
 print(output)
