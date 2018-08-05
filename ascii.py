@@ -75,28 +75,32 @@ def get_full_path(file_dir, file_prefix):
     else:
         raise Exception("No file found with prefix '{}' in '{}'".format(file_prefix, file_dir))
 
-# File locations
-sample_path = get_full_path('samples', 'girl')
-output_path = 'result.txt'
+def main():
+    # File locations
+    sample_path = get_full_path('samples', 'girl')
+    output_path = 'result.txt'
 
-# Load grayscale image
-img = Image.open(sample_path)
-img = grayscale(img)
+    # Load grayscale image
+    img = Image.open(sample_path)
+    img = grayscale(img)
 
-pixels = np.asarray(img)
-height, width = pixels.shape
-y_step, x_step = calculate_step_sizes(height, width)
+    pixels = np.asarray(img)
+    height, width = pixels.shape
+    y_step, x_step = calculate_step_sizes(height, width)
 
-output = ''
-for y in np.arange(0, height-y_step, y_step):
-    for x in np.arange(0, width-x_step, x_step):
-        val = average_val(pixels, y, x, y_step, x_step)
-        if val < 128:
-            output += '#'
-        else:
-            output += '.'
-    output += '\n'
+    output = ''
+    for y in np.arange(0, height-y_step, y_step):
+        for x in np.arange(0, width-x_step, x_step):
+            val = average_val(pixels, y, x, y_step, x_step)
+            if val < 128:
+                output += '#'
+            else:
+                output += '.'
+        output += '\n'
 
-print(output)
-with open(output_path, 'w+') as f:
-    f.write(output)
+    print(output)
+    with open(output_path, 'w+') as f:
+        f.write(output)
+
+if __name__ == "__main__":
+    main()
