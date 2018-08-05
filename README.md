@@ -1,28 +1,42 @@
 Convert an image into an ASCII character representation.
 
 ```
-                               -----//------
-                           --//-----//-----////-
-                         -/////##//----//##///////-                                ---
-                       -/////////--   --////////////-                            //##/-
-                      /////////---////- ---//////////-                        -/###/-
-                      ////////-- /####-  --//////////-      ----------     -/####/-
-                       ///////-  -////--  --/////////##########################/-
-                        -////-   ------   --////--//#/####################/////-
-                                 -/-       -////////////##################//////-
-                                  ---       --//////////################//////////
-                                  -/-         -///----/-/#############/////---////
-                                   -    -       ------/--##########///--///---////-
-                                                 ----/---/####/--------  ----/////-
-                                                  --//------       -  -     --/////
-                                                   --///            ----      ---//-
-                                            -          -             -----        -/-
-                                                                      ----         -/-
-                                             -                        ---
-                                                                      --
-                                                                    -
-                                                                  ---            ----
-
-                                                   -- -
-                                                  -- ---
+                               `-''___:____'''-``
+                          -':;*EE!/*;***;^^"^;^"=:_'-``
+                      `-~,=^)(((233E)))!*E()/;;^^^"=,,,:''`
+                   `',,,=^/(EE)!!!/;^^^^;;=:~:,:::,,="""=="":`
+                 `_^//^^;;**;^=,,,::::::::~~____''__:"^;^="^/;:`
+                _;/;=,:~::,,,,,,,,,,,,,,,,,,:::~:~~:,"^^,,,,^/;,-
+              `,*^,__:::,,,,,=,,=,==,,===""""""==,,,,=^^=,::,";;=-
+             `:;*,::,==="=""^^^^"^^^"=""""============"^"^,~:,,=",`
+             _^^*^""^;;;/;;;^^^^^"^^^",,,,,,,,,,==,,,,===""=""="=='
+            `:^;**;;;;;^^""=========^^^^^;/*!))EE)*;^,,,,,,,,^;;;",``-`
+            `=,=**;;;^^"="^;;//****/*(E3bVK0DD0H#96VUI);^,,:~:=;;/!**3Y=`
+            -=^/!*;;"=";*(bV9KK#9UI())3S9999#KKHMMK#6OOS2*^,,::"//;!*/IY,
+            `^(3E/;^^I9MHHHHHHK###b!^"^*YOV696VVUOSbI3)*;;;^,,,,,"EE!/;2^
+             'EY)^;!UK##KKHHMMK##62/^"=";**///****//;"=,,::=^=,,,,;23E*/_
+           `::^3!="EO9KK6UUVOSb3();"="=,,"^;/!EE)*;^^^^^^"=,,^^=,,=/)*!/-
+           -(O3(*"^(2))EEE)*/;;*E!^==""===="^^;EYO66VObYI2)//^^"=^E/^,^!;",'`
+            :bE)E/^/^"^^^^^;/EY2*;;**!!)(3YSUVOI32YO9MHHHKU2b(^^^!MVY2OB$$BNK(,`
+             ~/(3E;/;/!!)E3b6#VbSV#MK######VSI()!E3IbO69MM6bS3;;!3B%%%%&%%$0NBMI,`
+              `;3E*)2YbSOV#H0#VSbbSOVVVOOSSSOOSYbUMDDDK69O3bS()EE2N&&&&%$N00BD096;`
+               `^!E3IOV6#MDH#6VOOUV666VOObE//^^==;299OIYUI3SYII22Y0%%$ND0DB$NM0MVb'
+                `=(2,,SV69KM#KDNB02*/^=~,=:~"^^*)323(((2b3bbbSSSOO6K00DNB$$NDH0HVO:
+                  ``  :IUVUS699#MKb(!))*/)E)EE(E))))EE(b33bbOV9KK9MNBBBB$BNDD00DKV)'
+                       -;SUUbOOYIYYYYI223332IbSSY3)))E32EIYUKDD00NNNBB$%BNDDD0DN06bE,`
+                      '/9N096SYbb22YSOV99666VObI2(!!*;E!2O#DDDNBBBB$%%%BNDDD000DD#OSIE;,_---``
+                   `,IN$BDDNN09SII2332IYII23(E))!!!*;/)SKDNNBBBBB$%%%$BNNDNNNDDNNH#K6USYI223(!;^",::'-''-`
+                 -/#B$NDDB%%%%$NMO3(E)EEEEE((EEEEE(2bOMNNB$$$$$$$%&%$BNDD000D00DNH9###96VVUSbbYYI3(3E**)!/^""=,~-```
+                :6BB0HN%%&&&&%%%%BH6OY2IIIIYbOOOV#MHDNB$$$$$$$%%%&&%BNDDDDDDDDD0DKMDHK#999999###6VUUSYYbYI233EEE!;;^
+              `:VDMMB%%%&&&&&&&%%%D0D0DDDDNNNNBBBDDB$BB$$$$$$$$%&&%BNDDDDDDDD00006DNDHMKKKKKK9996VVVV66699VUOSbbYIY3
+            `;VVKHN$$%%%&&&&%%%&&%DMNDMKMH0DDNNB$BB$%%%%$$$$$$$%%&$NDDD000D0HMMMH#NND0HHHM##96VVVV6699966666996966UO
+             ,b0NNB$$%%%%%%&%%&&%&$0KDNKVUUOOV#HDB$$$$$$%%$$$$%&&$NDD00D0HHMKMM0H#NNDD0HMK##999999#99996666666VVVV6V
+               '2NBBB$$%%%%%%%&&&&&$NMMHHMKK999#HDBBB$$$$$%%%%&&$BDDD000HM###9KHK9NNDDD0HMKKMMMK##99969###9666VUOOVV
+                `=VNNB$%$%%%%%%%%&&%NNDN$BNDDDNB$BB$$BB$&%%%%&&%BND0HMHKK#KMMH0DNDNNNDDD0HHHHHMKKKMMMMKKKK##996VOV66
+       ```````````'2NBB$%%%%$$$$%%%%N0DNB$BDNBBBBBBB$$$%&&%&%%$BNDD0HMMMMHDNNB$$$BNNNNDDD0DD0H0H0000HMKKMKKK#966999#
+      ``````````'=*(UDB$$$$$$BB$$%%$$NM#KH0DD0DD0HHK0$%%&&&%$BN0MKKKM0DNB$$$$$$BBNNNDDDDDDDDDDD00D0HHHHHMMMMKKKK#99K
+     ````````-~^E2bUOI#NB$%$$$BB$$$$$$B0966666999999H$%%%%$BDHMH0DNB$BBBBBBBBBBNNNNDDDDDDDDDDDD00HHMMHHHHMMMMMMK###9
+  ````````-,;)S6U6OSS#DDNNBB$$$$$%%%%$$$NH#966VVV690$%%%%BDDDNBBB$%$$BBBBBBBNNNNDDDDD0000DDDDD00HHHHHMKMMMHHMMMMKK96
+ ```````-:;(b9K96V9KHNNDNDDNNDB$$BB$%%%$$B0#99966MB%%%%$NDNBB$$%%%$BBBNNNNNNNDDDDDDD0000DD000HHHHMHHMHMMMHHHMMMMMKK9
+`````-_,;E3VKHMKK6#H0NNNNNNNND0BBBBBB$%%$$B0K969D$%%%$BDNB$%%%%$$$BNNNNNNNDDDDDDDDD00000000HMMMKKMMMMHHHHHHHMMMMK##K
 ```
