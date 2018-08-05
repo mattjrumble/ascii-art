@@ -35,23 +35,24 @@ def calculate_step_sizes(height, width):
     # Calculate how big a region of the image each ASCII char should represent,
     # so that we remain inside the max output dimensions.
 
-    TERMINAL_DIMENSIONS = [150, 40, 10, 22]
+    TERMINAL_DIMENSIONS = [150, 41, 10, 22]
     GITHUB_DIMENSIONS = [150, 25, 10, 29]
-    DIMENSIONS_LIST = GITHUB_DIMENSIONS
+    DIMENSIONS = TERMINAL_DIMENSIONS
 
     # Max number of output characters to display
-    MAX_OUTPUT_WIDTH = DIMENSIONS_LIST[0]
-    MAX_OUTPUT_HEIGHT = DIMENSIONS_LIST[1]
+    MAX_OUTPUT_WIDTH = DIMENSIONS[0]
+    MAX_OUTPUT_HEIGHT = DIMENSIONS[1]
     # The dimensions of an ASCII char displayed in my terminal
-    ASCII_CHAR_WIDTH = DIMENSIONS_LIST[2]
-    ASCII_CHAR_HEIGHT = DIMENSIONS_LIST[3]
+    ASCII_CHAR_WIDTH = DIMENSIONS[2]
+    ASCII_CHAR_HEIGHT = DIMENSIONS[3]
 
     # See if we can fit to max output width
-    x_step = width / MAX_OUTPUT_WIDTH
+    # Use height-1 and width-1 to avoid index out of bound errors from floating point rounding
+    x_step = (width-1) / MAX_OUTPUT_WIDTH
     y_step = x_step * (ASCII_CHAR_HEIGHT / ASCII_CHAR_WIDTH)
-    if height / y_step > MAX_OUTPUT_HEIGHT:
+    if (height-1) / y_step > MAX_OUTPUT_HEIGHT:
         # Can't fit to max output width, fit to max output height instead
-        y_step = height / MAX_OUTPUT_HEIGHT
+        y_step = (height-1) / MAX_OUTPUT_HEIGHT
         x_step = y_step * (ASCII_CHAR_WIDTH / ASCII_CHAR_HEIGHT)
 
     return y_step, x_step
@@ -75,6 +76,17 @@ def get_full_path(file_dir, file_prefix):
     else:
         raise Exception("No file found with prefix '{}' in '{}'".format(file_prefix, file_dir))
 
+def color_val_to_char(val):
+    # For the given color value, return the corresponding ASCII char.
+    if val < 64:
+        return '#'
+    elif val < 128:
+        return '/'
+    elif val < 192:
+        return '-'
+    else:
+        return ' '
+
 def main():
     # File locations
     sample_path = get_full_path('samples', 'girl')
@@ -92,10 +104,7 @@ def main():
     for y in np.arange(0, height-y_step, y_step):
         for x in np.arange(0, width-x_step, x_step):
             val = average_val(pixels, y, x, y_step, x_step)
-            if val < 128:
-                output += '#'
-            else:
-                output += '.'
+            output += color_val_to_char(val)
         output += '\n'
 
     print(output)
