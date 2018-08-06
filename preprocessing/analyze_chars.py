@@ -1,4 +1,8 @@
-# Use a screenshot of all ASCII chars to determine the luminance value of each of them
+"""
+Use a screenshot of all ASCII chars to determine the luminance value of each of them.
+
+This is a hacky one-off piece of code that laughs in the face of any coding standards.
+"""
 
 import os
 import numpy as np
