@@ -5,13 +5,31 @@ import json
 from math import floor
 from PIL import Image
 
+
+TERMINAL_DISPLAY = OutputDisplay(180, 41, 10, 22)
+NOTEPAD_PLUS_BIG_DISPLAY = OutputDisplay(400, 100, 10, 18)
+GITHUB_DISPLAY = OutputDisplay(223, 40, 10, 29)
+
+
+class OutputDisplay:
+    """Hold information about how the output will be displayed."""
+    def __init__(self):
+        self.max_chars_wide = max_chars_wide
+        self.max_chars_high = max_chars_high
+        self.char_width = char_width
+        self.char_height = char_height
+
+
 def grayscale(img):
-    # Convert img to grayscale.
+    """Convert img to grayscale."""
     return img.convert('RGB').convert('L')
 
+
 def average_val(pixels, y, x, y_step, x_step):
-    # Return average value in pixels numpy array in the given rectangle
-    # Expects rectangle coordinates to be in the range of the pixels array
+    """Return average value in pixels numpy array in the given rectangle.
+    The given coordinates are floats and should be rounded appropriately.
+    Expects rectangle coordinates to be in the range of the pixels array."""
+
     if y_step == 0:
         raise Exception('y_step must be non-zero')
     if x_step == 0:
@@ -33,29 +51,19 @@ def average_val(pixels, y, x, y_step, x_step):
     return total / count
 
 def calculate_step_sizes(height, width):
-    # Calculate how big a region of the image each ASCII char should represent,
-    # so that we remain inside the max output dimensions.
+    """Calculate how big a region of the image each ASCII char should represent,
+    so that we remain inside the max output dimensions."""
 
-    TERMINAL_DIMENSIONS = [180, 41, 10, 22]
-    NOTEPAD_PLUS_BIG_DIMENSIONS = [400, 100, 10, 18]
-    GITHUB_DIMENSIONS = [223, 40, 10, 29]
-    DIMENSIONS = GITHUB_DIMENSIONS
-
-    # Max number of output characters to display
-    MAX_OUTPUT_WIDTH = DIMENSIONS[0]
-    MAX_OUTPUT_HEIGHT = DIMENSIONS[1]
-    # The dimensions of an ASCII char displayed in my terminal
-    ASCII_CHAR_WIDTH = DIMENSIONS[2]
-    ASCII_CHAR_HEIGHT = DIMENSIONS[3]
+    display = TERMINAL_DISPLAY
 
     # See if we can fit to max output width
     # Use height-1 and width-1 to avoid index out of bound errors from floating point rounding
-    x_step = (width-1) / MAX_OUTPUT_WIDTH
-    y_step = x_step * (ASCII_CHAR_HEIGHT / ASCII_CHAR_WIDTH)
-    if (height-1) / y_step > MAX_OUTPUT_HEIGHT:
+    x_step = (width-1) / display.max_chars_wide
+    y_step = x_step * (display.char_height / display.char_width)
+    if (height-1) / y_step > display.max_chars_height:
         # Can't fit to max output width, fit to max output height instead
         y_step = (height-1) / MAX_OUTPUT_HEIGHT
-        x_step = y_step * (ASCII_CHAR_WIDTH / ASCII_CHAR_HEIGHT)
+        x_step = y_step * (display.char_width / display.char_height)
 
     return y_step, x_step
 
