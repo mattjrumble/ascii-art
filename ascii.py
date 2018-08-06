@@ -125,9 +125,6 @@ def main():
     height, width = pixels.shape
     y_step, x_step = calculate_step_sizes(height, width, display)
 
-    # Floating point round errors can lead to an unintended final value in the range
-    # that is marginally smaller than the stop argument. Remove the final value if
-    # this is the case. TODO: Is this needed for any dimensions?
     y_range = np.arange(0, height-y_step, y_step)
     x_range = np.arange(0, width-x_step, x_step)
 
