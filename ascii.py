@@ -53,9 +53,7 @@ def average_val(arr, start_y, end_y, start_x, end_x):
 
 def calculate_step_sizes(height, width, display):
     """Calculate how big a region of the image each ASCII char should represent,
-    so that we remain inside the output display's dimensions. Note that a region
-    we look at must always be at least a step size away from the edge of the image,
-    otherwise adding the step size on to that would take us out bounds.
+    so that we remain inside the output display's dimensions.
     All arguments are integers. Return step sizes as floats."""
     
     # Try to fit to fill the display width-wise
